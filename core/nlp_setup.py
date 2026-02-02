@@ -2,8 +2,6 @@ import spacy
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 from transformers import pipeline
-import subprocess
-import sys
 
 # NLTK setup
 try:
@@ -17,15 +15,16 @@ except LookupError:
     nltk.download("vader_lexicon")
     sia = SentimentIntensityAnalyzer()
 
-# spaCy setup (Streamlit Cloud safe)
+# spaCy setup (Streamlit Cloud SAFE)
 def load_spacy_model():
     try:
         return spacy.load("en_core_web_sm")
-    except OSError:
-        subprocess.check_call(
-            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"]
-        )
-        return spacy.load("en_core_web_sm")
+    except Exception:
+        # Fallback: blank English pipeline (NO crash)
+        nlp = spacy.blank("en")
+        if "sentencizer" not in nlp.pipe_names:
+            nlp.add_pipe("sentencizer")
+        return nlp
 
 nlp = load_spacy_model()
 
