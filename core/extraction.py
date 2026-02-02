@@ -2,6 +2,7 @@ import fitz
 from docx import Document
 from io import BytesIO
 from nltk.tokenize import sent_tokenize
+import re
 from core.nlp_setup import nlp
 
 def extract_text(file, file_type):
@@ -33,7 +34,12 @@ def classify_contract(text):
     return "General Contract"
 
 def extract_clauses(text):
-    return [s.strip() for s in sent_tokenize(text) if len(s.strip()) > 15]
+    try:
+        sentences = sent_tokenize(text)
+    except LookupError:
+        sentences = re.split(r'(?<=[.!?])\s+', text)
+
+    return [s.strip() for s in sentences if len(s.strip()) > 15]
 
 def extract_entities(text):
     doc = nlp(text)
