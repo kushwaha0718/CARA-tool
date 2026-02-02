@@ -74,6 +74,16 @@ if uploaded:
         sentiment = analyze_sentiment(text)
 
         explanations = []
+        analysis = {
+            "summary": {
+                "type": ctype,
+                "risk": overall,
+                "sentiment": sentiment,
+                "ambiguities": len(ambiguities)
+            },
+            "entities": entities,
+            "risks": risks
+        }
 
         tab1, tab2, tab3, tab4, tab5 = st.tabs(
             ["Summary", "Clauses", "Risks", "Compare", "Export"]
@@ -219,16 +229,6 @@ if uploaded:
             st.subheader("Export & Save")
 
             if st.button("Save Analysis as JSON"):
-                analysis = {
-                    "summary": {
-                        "type": ctype,
-                        "risk": overall,
-                        "sentiment": sentiment,
-                        "ambiguities": len(ambiguities)
-                    },
-                    "entities": entities,
-                    "risks": risks
-                }
                 st.download_button(
                     "Download JSON",
                     json.dumps(analysis, indent=2),
