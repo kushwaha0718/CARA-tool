@@ -1,4 +1,4 @@
-<h1 align="center">📄 Contract Analysis & Risk Assessment Tool (CARA)</h1>
+<h1 align="center">Contract Analysis & Risk Assessment Tool (CARA)</h1>
 
 <p align="center">
   A GenAI-powered legal assistant that helps users understand contracts, identify risks, and make informed decisions — built for real-world use.
@@ -12,17 +12,17 @@
 
 <hr/>
 
-<h2>🚀 Live Demo</h2>
+<h2>Live Demo</h2>
 
 <p>
-👉 <a href="https://caratoolbykushwaha.streamlit.app" target="_blank">
+-><a href="https://caratoolbykushwaha.streamlit.app" target="_blank">
 <strong>View Deployed App on Streamlit Cloud</strong>
 </a>
 </p>
 
 <hr/>
 
-<h2>🧠 Why this project?</h2>
+<h2>Why this project?</h2>
 
 <p>
 Contracts are long, complex, and often confusing — especially for individuals and small businesses.
@@ -30,10 +30,10 @@ During a hackathon challenge, I built <strong>CARA</strong> to simplify contract
 </p>
 
 <ul>
-  <li>📌 What type of contract is this?</li>
-  <li>⚠️ Where are the risks?</li>
-  <li>❓ Which clauses are ambiguous?</li>
-  <li>😊 Is the overall sentiment positive or risky?</li>
+  <li>What type of contract is this?</li>
+  <li>Where are the risks?</li>
+  <li>Which clauses are ambiguous?</li>
+  <li>Is the overall sentiment positive or risky?</li>
 </ul>
 
 <p>
@@ -42,23 +42,23 @@ Everything runs locally or on Streamlit Cloud — no paid APIs required.
 
 <hr/>
 
-<h2>✨ Key Features</h2>
+<h2>Key Features</h2>
 
 <ul>
-  <li>📤 Upload contracts (PDF / DOCX / TXT)</li>
-  <li>📄 Automatic clause extraction</li>
-  <li>🏷 Entity detection (Parties, Dates, Jurisdiction, Amounts)</li>
-  <li>⚠️ Risk identification & scoring (Low / Medium / High)</li>
-  <li>❓ Ambiguity detection</li>
-  <li>😊 Sentiment analysis</li>
-  <li>📊 Clean dashboard UI with visual indicators</li>
-  <li>📥 Export analysis as PDF or JSON</li>
-  <li>🕵️ Audit logging of user actions</li>
+  <li>Upload contracts (PDF / DOCX / TXT)</li>
+  <li>Automatic clause extraction</li>
+  <li>Entity detection (Parties, Dates, Jurisdiction, Amounts)</li>
+  <li>Risk identification & scoring (Low / Medium / High)</li>
+  <li>Ambiguity detection</li>
+  <li>Sentiment analysis</li>
+  <li>Clean dashboard UI with visual indicators</li>
+  <li>Export analysis as PDF or JSON</li>
+  <li>Audit logging of user actions</li>
 </ul>
 
 <hr/>
 
-<h2>🛠 Tech Stack</h2>
+<h2>Tech Stack</h2>
 
 <table>
 <tr>
@@ -85,28 +85,30 @@ Everything runs locally or on Streamlit Cloud — no paid APIs required.
 
 <hr/>
 
-<h2>📁 Project Structure</h2>
+<h2>Project Structure</h2>
 
 <pre>
 CARA-tool/
 │
-├── app.py                 # Main Streamlit app
+├── app.py                 
 ├── requirements.txt
 │
 ├── core/
-│   ├── extraction.py      # Text & clause extraction
-│   ├── analysis.py        # Risk & sentiment analysis
-│   ├── generation.py      # Clause explanations & suggestions
-│   ├── audit.py           # Audit logging
-│   └── nlp_setup.py       # NLP model initialization
+│   ├── extraction.py      
+│   ├── analysis.py        
+│   ├── generation.py      
+│   ├── audit.py           
+│   └── nlp_setup.py       
 │
 ├── ui/
-│   └── styles.py          # Custom UI styles
+│   └── styles.py          
 </pre>
 
 <hr/>
 
-<h2>⚙️ Local Setup</h2>
+<h2>Local Setup</h2>
+
+<hr/> <h2>🧩 Challenges & Learnings</h2> <ul> <li>Handling NLP models on Streamlit Cloud</li> <li>Graceful fallbacks when spaCy / NLTK resources are unavailable</li> <li>Designing a modular, production-friendly project structure</li> <li>Balancing performance with explainability</li> </ul> <p> These challenges significantly improved my understanding of deploying NLP-heavy applications in constrained cloud environments. </p> <hr/> <h2>🔮 Future Improvements</h2> <ul> <li>Clause comparison across multiple contracts</li> <li>Custom risk thresholds per contract type</li> <li>User authentication & saved history</li> <li>Improved NER for legal-specific entities</li> </ul> <hr/> <h2>👤 Author</h2> <p> <strong>Ayush Kushwaha</strong><br/> Aspiring Data Scientist | NLP & AI Enthusiast </p> <p> 🔗 <a href="https://github.com/kushwaha0718" target="_blank">GitHub</a> </p> <hr/> <p align="center"> ⭐ If you find this project useful, consider starring the repository! </p> ```
 
 <ol>
   <li><strong>Clone the repository</strong></li>
@@ -117,5 +119,3 @@ git clone https://github.com/kushwaha0718/CARA-tool.git
 cd CARA-tool
 pip install -r requirements.txt
 streamlit run app.py
-
-<hr/> <h2>🧩 Challenges & Learnings</h2> <ul> <li>Handling NLP models on Streamlit Cloud</li> <li>Graceful fallbacks when spaCy / NLTK resources are unavailable</li> <li>Designing a modular, production-friendly project structure</li> <li>Balancing performance with explainability</li> </ul> <p> These challenges significantly improved my understanding of deploying NLP-heavy applications in constrained cloud environments. </p> <hr/> <h2>🔮 Future Improvements</h2> <ul> <li>Clause comparison across multiple contracts</li> <li>Custom risk thresholds per contract type</li> <li>User authentication & saved history</li> <li>Improved NER for legal-specific entities</li> </ul> <hr/> <h2>👤 Author</h2> <p> <strong>Ayush Kushwaha</strong><br/> Aspiring Data Scientist | NLP & AI Enthusiast </p> <p> 🔗 <a href="https://github.com/kushwaha0718" target="_blank">GitHub</a> </p> <hr/> <p align="center"> ⭐ If you find this project useful, consider starring the repository! </p> ```
