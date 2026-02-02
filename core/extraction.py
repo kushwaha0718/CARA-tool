@@ -1,51 +1,65 @@
-import fitz
-from docx import Document
-from io import BytesIO
-from nltk.tokenize import sent_tokenize
 import re
 from core.nlp_setup import nlp
 
-def extract_text(file, file_type):
-    try:
-        if file_type == "pdf":
-            doc = fitz.open(stream=file.read(), filetype="pdf")
-            return "\n".join(page.get_text() for page in doc)
-        if file_type == "docx":
-            doc = Document(BytesIO(file.read()))
-            return "\n".join(p.text for p in doc.paragraphs)
-        if file_type == "txt":
-            return file.read().decode("utf-8", errors="ignore")
-    except Exception:
-        return ""
-    return ""
-
-def classify_contract(text):
-    t = text.lower()
-    if "employment" in t:
-        return "Employment Agreement"
-    if "vendor" in t or "supplier" in t:
-        return "Vendor Contract"
-    if "lease" in t or "rent" in t:
-        return "Lease Agreement"
-    if "partnership" in t:
-        return "Partnership Deed"
-    if "service" in t:
-        return "Service Contract"
-    return "General Contract"
-
-def extract_clauses(text):
-    try:
-        sentences = sent_tokenize(text)
-    except LookupError:
-        sentences = re.split(r'(?<=[.!?])\s+', text)
-
-    return [s.strip() for s in sentences if len(s.strip()) > 15]
-
 def extract_entities(text):
-    doc = nlp(text)
-    return {
-        "Parties": list(set(ent.text for ent in doc.ents if ent.label_ in ["PERSON", "ORG"])),
-        "Dates": list(set(ent.text for ent in doc.ents if ent.label_ == "DATE")),
-        "Amounts": list(set(ent.text for ent in doc.ents if ent.label_ == "MONEY")),
-        "Jurisdiction": list(set(ent.text for ent in doc.ents if ent.label_ == "GPE")),
+    entities = {
+        "Parties": [],
+        "Dates": [],
+        "Amounts": [],
+        "Jurisdiction": []
     }
+
+    # 1. Try spaCy NER (local)
+    try:
+        if nlp.has_pipe("ner"):
+            doc = nlp(text)
+            for ent in doc.ents:
+                if ent.label_ in ("ORG", "PERSON"):
+                    entities["Parties"].append(ent.text)
+                elif ent.label_ == "DATE":
+                    entities["Dates"].append(ent.text)
+                elif ent.label_ in ("GPE", "LOC"):
+                    entities["Jurisdiction"].append(ent.text)
+                elif ent.label_ == "MONEY":
+                    entities["Amounts"].append(ent.text)
+    except Exception:
+        pass  # fallback will handle
+
+    # 2. FALLBACK HEURISTICS (Cloud)
+
+    # Dates
+    if not entities["Dates"]:
+        entities["Dates"] = re.findall(
+            r'\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b|\b\d{1,2}\s+\w+\s+\d{4}\b|\b\d+\s+(days?|months?|years?)\b',
+            text,
+            re.IGNORECASE
+        )
+
+    # Amounts (₹, $, INR)
+    if not entities["Amounts"]:
+        entities["Amounts"] = re.findall(
+            r'(₹\s?\d+(?:,\d+)*(?:\.\d+)?|\$\s?\d+(?:,\d+)*(?:\.\d+)?|\bINR\s?\d+(?:,\d+)*)',
+            text,
+            re.IGNORECASE
+        )
+
+    # Jurisdiction
+    if not entities["Jurisdiction"]:
+        entities["Jurisdiction"] = re.findall(
+            r'\b(India|Hyderabad|Bangalore|Delhi|Mumbai|Chennai|Telangana|Karnataka|Andhra Pradesh)\b',
+            text,
+            re.IGNORECASE
+        )
+
+    # Parties (basic heuristic)
+    if not entities["Parties"]:
+        entities["Parties"] = re.findall(
+            r'\b[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*\s+(?:Ltd|Limited|LLP|Inc|Private Limited|Pvt\. Ltd\.)\b',
+            text
+        )
+
+    # Deduplicate + clean
+    for k in entities:
+        entities[k] = sorted(set(e.strip() for e in entities[k]))
+
+    return entities
