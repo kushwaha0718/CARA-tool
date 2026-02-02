@@ -106,10 +106,12 @@ CARA-tool/
 
 <hr/>
 
+
+
+<hr/> <h2>Challenges & Learnings</h2> <ul> <li>Handling NLP models on Streamlit Cloud</li> <li>Graceful fallbacks when spaCy / NLTK resources are unavailable</li> <li>Designing a modular, production-friendly project structure</li> <li>Balancing performance with explainability</li> </ul> <p> These challenges significantly improved my understanding of deploying NLP-heavy applications in constrained cloud environments. </p> <hr/> <h2>Future Improvements</h2> <ul> <li>Clause comparison across multiple contracts</li> <li>Custom risk thresholds per contract type</li> <li>User authentication & saved history</li> <li>Improved NER for legal-specific entities</li> </ul> <hr/> <h2>Author</h2> <p> <strong>Ayush Kushwaha</strong><br/> Aspiring Data Scientist | NLP & AI Enthusiast </p> <p> <a href="https://github.com/kushwaha0718" target="_blank">GitHub</a> </p> <hr/> <p align="center"> If you find this project useful, consider starring the repository! </p> ```
+
+
 <h2>Local Setup</h2>
-
-<hr/> <h2>🧩 Challenges & Learnings</h2> <ul> <li>Handling NLP models on Streamlit Cloud</li> <li>Graceful fallbacks when spaCy / NLTK resources are unavailable</li> <li>Designing a modular, production-friendly project structure</li> <li>Balancing performance with explainability</li> </ul> <p> These challenges significantly improved my understanding of deploying NLP-heavy applications in constrained cloud environments. </p> <hr/> <h2>🔮 Future Improvements</h2> <ul> <li>Clause comparison across multiple contracts</li> <li>Custom risk thresholds per contract type</li> <li>User authentication & saved history</li> <li>Improved NER for legal-specific entities</li> </ul> <hr/> <h2>👤 Author</h2> <p> <strong>Ayush Kushwaha</strong><br/> Aspiring Data Scientist | NLP & AI Enthusiast </p> <p> 🔗 <a href="https://github.com/kushwaha0718" target="_blank">GitHub</a> </p> <hr/> <p align="center"> ⭐ If you find this project useful, consider starring the repository! </p> ```
-
 <ol>
   <li><strong>Clone the repository</strong></li>
 </ol>
